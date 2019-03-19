@@ -276,7 +276,7 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
   if (picUrl) {
     div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
   }
-  div.querySelector('.name').textContent = name;
+  div.querySelector('.name').textContent = name + time;
   var messageElement = div.querySelector('.message');
   if (text) { // If the message is text.
     messageElement.textContent = text;
