@@ -1,139 +1,169 @@
-html, body {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
+html,
+body {
+	font-family: 'Roboto', 'Helvetica', sans-serif;
 }
-main, #messages-card {
-  padding: 0;
-  margin: 0;
-}
-#messages-card-container {
-  height: 100%;
-  padding: 0;
-}
+
+main,
 #messages-card {
-  width: 100vw;
+	padding: 0;
+	margin: 0;
 }
+
+#messages-card-container {
+	height: 100%;
+	padding: 0;
+}
+
+#messages-card {
+	width: 100vw;
+}
+
 .mdl-layout__header {
-  border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #eee;
 }
+
 .mdl-layout__header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 16px;
+	margin: 0;
 }
+
 .mdl-card__supporting-text {
-  width: 100%;
-  height: 100%;
-  padding: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
 }
+
 #messages {
-  overflow-y: auto;
-  height: calc(100vh - 198px);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
+	overflow-y: auto;
+	height: calc(100vh - 188px);
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
 }
+
 #message-filler {
-  flex-grow: 1;
+	flex-grow: 1;
 }
+
 .message-container {
-  display: block;
-  padding: 8px 0;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+	display: block;
+	padding: 8px 0;
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
 }
+
 .message-container.visible {
-  opacity: 1;
+	opacity: 1;
 }
+
 .message-container .pic {
-  background-image: url('/images/profile_placeholder.png');
-  background-repeat: no-repeat;
-  width: 32px;
-  height: 32px;
-  background-size: 32px;
-  border-radius: 100%;
+	background-image: url('/images/profile_placeholder.png');
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
+	background-size: 32px;
+	border-radius: 100%;
 }
+
 .message-container .spacing {
-  display: table-cell;
-  vertical-align: top;
-  padding-right: 16px;
+	display: table-cell;
+	vertical-align: top;
+	padding-right: 16px;
 }
+
 .message-container .message {
-  display: table-cell;
-  border-radius: 8px;
-  padding: 8px;
-  background-color: #eee;
+	display: table-cell;
+	border-radius: 8px;
+	padding: 8px;
+	background-color: #eee;
 }
+
 .message-container .name {
-  display: inline-block;
-  width: 100%;
-  padding-left: 48px;
-  font-weight: bold;
-  color: #b2b2b2;
-  font-size: 12px;
-  box-sizing: border-box;
+	display: inline-block;
+	width: 100%;
+	padding-left: 48px;
+	padding-top: 4px;
+	color: #b2b2b2;
+	font-size: 12px;
+	box-sizing: border-box;
 }
+
 #message-form {
-  display: flex;
-  flex-direction: row;
-  width: calc(100% - 80px);
-  padding: 8px 0 8px 16px;
-  float: left;
-  border-top: 1px solid #eee;
+	display: flex;
+	flex-direction: row;
+	width: calc(100% - 80px);
+	padding: 8px 0 8px 16px;
+	float: left;
+	border-top: 1px solid #eee;
 }
+
 #image-form {
-  display: flex;
-  flex-direction: row;
-  width: 56px;
-  padding: 10px 8px 8px 0;
-  float: right;
-  border-top: 1px solid #eee;
+	display: flex;
+	flex-direction: row;
+	width: 56px;
+	padding: 10px 8px 8px 0;
+	float: right;
+	border-top: 1px solid #eee;
 }
+
 #message-form .mdl-textfield {
-  width: 100%;
+	width: 100%;
 }
-#message-form button, #image-form button {
-  margin: 0 8px;
+
+#message-form button,
+#image-form button {
+	margin: 0 8px;
 }
+
 #user-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
+
 #user-container #user-pic {
-  top: -3px;
-  position: relative;
-  display: inline-block;
-  background-image: url('/images/profile_placeholder.png');
-  background-repeat: no-repeat;
-  width: 32px;
-  height: 32px;
-  background-size: 32px;
-  border-radius: 100%;
+	top: -3px;
+	position: relative;
+	display: inline-block;
+	background-image: url('/images/profile_placeholder.png');
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
+	background-size: 32px;
+	border-radius: 100%;
 }
+
 #user-container #user-name {
-  font-size: 16px;
-  padding: 0 16px;
+	font-size: 16px;
+	padding: 0 16px;
 }
+
 #image-form #submitImage {
-  padding: 24px;
+	padding: 24px;
 }
+
 .message img {
-  max-width: 100%;
-  max-height: auto;
-  border-radius: 8px;
+	max-width: 100%;
+	max-height: auto;
+	border-radius: 8px;
 }
+
 #mediaCapture {
-  display: none;
+	display: none;
 }
+
 @media screen and (max-width: 610px) {
-  #user-container {
-    padding-top: 4px;
-    padding-right: 4px;
-  }
-  #user-container #user-pic {
-    width: 24px;
-    height: 24px;
-    background-size: 100%;
-  }
+	#user-container {
+		padding-top: 4px;
+		padding-right: 4px;
+	}
+
+	#user-container #user-pic {
+		width: 24px;
+		height: 24px;
+		background-size: 100%;
+	}
 }
