@@ -15,6 +15,7 @@ script:
   - cd cloud-functions/functions
   - npm i
   - cd ..
+  - firebase use ily-chat --add
 
 after_success:
   - firebase deploy --token $FIREBASE_TOKEN
