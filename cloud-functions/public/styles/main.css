@@ -25,6 +25,7 @@ main,
 
 .mdl-layout__header {
 	border-bottom: 1px solid #eee;
+	box-shadow: none;
 }
 
 .mdl-layout__header-row {
@@ -44,7 +45,8 @@ main,
 }
 
 #messages {
-	overflow-y: auto;
+	overflow: auto;
+	width: calc(100% - 32px);
 	height: calc(100vh - 162px);
 	padding: 16px;
 	display: flex;

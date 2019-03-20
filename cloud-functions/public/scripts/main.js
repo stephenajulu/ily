@@ -65,7 +65,7 @@ function saveMessage(messageText) {
 // Loads chat messages history and listens for upcoming ones.
 function loadMessages() {
 	// Create the query to load the last 12 messages and listen for new ones.
-	var query = firebase.firestore().collection('messages').orderBy('timestamp', 'desc').limit(20);
+	var query = firebase.firestore().collection('messages').orderBy('timestamp', 'desc').limit(25);
 
 	// Start listening to the query.
 	query.onSnapshot(function (snapshot) {
@@ -294,7 +294,7 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
 		var elapsed = current - previous;
 
 		if (elapsed < msPerMinute) {
-			return Math.round(elapsed / 1000) + ' seconds ago';
+			return Math.round(elapsed / 1000) + ' just now';
 		} else if (elapsed < msPerHour) {
 			if (Math.round(elapsed / msPerMinute) == 1)
 				return Math.round(elapsed / msPerMinute) + ' minute ago';
