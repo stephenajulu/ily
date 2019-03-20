@@ -6,6 +6,7 @@ body,
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	user-select: none;
+	line-height: 1.5;
 }
 
 main,
@@ -90,7 +91,7 @@ main,
 	padding-right: 16px;
 }
 
-.message-container .message {
+.message {
 	position: relative;
 	display: table-cell;
 	border-radius: 0 8px 8px 8px;
@@ -98,7 +99,7 @@ main,
 	background-color: #eee;
 }
 
-.message-container .message:after {
+.message:after {
 	content: '';
 	position: absolute;
 	left: 0;
