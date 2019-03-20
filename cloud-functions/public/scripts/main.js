@@ -171,8 +171,11 @@ function authStateObserver(user) {
 		userPicElement.removeAttribute('hidden');
 		userPicElement.title = userName;
 		signOutButtonElement.removeAttribute('hidden');
+		messageListElement.removeAttribute('hidden');
 		// Hide sign-in button.
 		signInButtonElement.setAttribute('hidden', 'true');
+		document.getElementById("dummy").setAttribute('hidden', 'true');
+		document.getElementById("signedoff").setAttribute('hidden', 'true');
 		// We save the Firebase Messaging Device token and enable notifications.
 		saveMessagingDeviceToken();
 	} else { // User is signed out!
@@ -180,8 +183,11 @@ function authStateObserver(user) {
 		//		userNameElement.setAttribute('hidden', 'true');
 		userPicElement.setAttribute('hidden', 'true');
 		signOutButtonElement.setAttribute('hidden', 'true');
+		messageListElement.setAttribute('hidden', 'true');
 		// Show sign-in button.
 		signInButtonElement.removeAttribute('hidden');
+		document.getElementById("dummy").removeAttribute('hidden');
+		document.getElementById("signedoff").removeAttribute('hidden');
 	}
 }
 // Returns true if user is signed-in. Otherwise false and displays a message.
