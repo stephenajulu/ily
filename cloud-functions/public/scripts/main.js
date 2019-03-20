@@ -216,7 +216,7 @@ function checkSignedInWithMessage() {
 	// Display a message to the user using a Toast.
 	var data = {
 		message: 'You must sign-in first',
-		timeout: 2000
+		timeout: 3000
 	};
 	signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
 	return false;
@@ -278,11 +278,56 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
 	if (picUrl) {
 		div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
 	}
+
 	var date = new Date();
 	date.setTime(timestamp.seconds * 1000);
 	var n = date.toLocaleDateString();
 	var h = date.toLocaleTimeString();
-	div.querySelector('.name').textContent = name + ` · ` + n + ` · ` + h;
+
+	function timeDifference(current, previous) {
+		var msPerMinute = 60 * 1000;
+		var msPerHour = msPerMinute * 60;
+		var msPerDay = msPerHour * 24;
+		var msPerMonth = msPerDay * 30;
+		var msPerYear = msPerDay * 365;
+
+		var elapsed = current - previous;
+
+		if (elapsed < msPerMinute) {
+			return Math.round(elapsed / 1000) + ' seconds ago';
+		} else if (elapsed < msPerHour) {
+			if (Math.round(elapsed / msPerMinute) == 1)
+				return Math.round(elapsed / msPerMinute) + ' minute ago';
+			else
+				return Math.round(elapsed / msPerMinute) + ' minutes ago';
+		} else if (elapsed < msPerDay) {
+			if (Math.round(elapsed / msPerHour) == 1)
+				return Math.round(elapsed / msPerHour) + ' hour ago';
+			else
+				return Math.round(elapsed / msPerHour) + ' hours ago';
+		} else if (elapsed < msPerMonth) {
+			if (Math.round(elapsed / msPerDay) == 1)
+				return Math.round(elapsed / msPerDay) + ' day ago';
+			else
+				return Math.round(elapsed / msPerDay) + ' days ago';
+		} else if (elapsed < msPerYear) {
+			if (Math.round(elapsed / msPerMonth) == 1)
+				return Math.round(elapsed / msPerMonth) + ' month ago';
+			else
+				return Math.round(elapsed / msPerMonth) + ' months ago';
+		} else {
+			if (Math.round(elapsed / msPerYear) == 1)
+				return Math.round(elapsed / msPerYear) + ' year ago';
+			else
+				return Math.round(elapsed / msPerYear) + ' years ago';
+		}
+	}
+
+	// TESTS
+	var current = new Date();
+
+	div.querySelector('.name').textContent = name + ` · ` + timeDifference(current, date);
+	div.querySelector('.name').title = n + ` at ` + h;
 	var messageElement = div.querySelector('.message');
 	if (text) { // If the message is text.
 		messageElement.textContent = text;
@@ -297,6 +342,7 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
 		messageElement.innerHTML = '';
 		messageElement.appendChild(image);
 	}
+	document.getElementById("message-filler").setAttribute('hidden', 'true');
 	// Show the card fading-in and scroll to view the new message.
 	setTimeout(function () {
 		div.classList.add('visible')

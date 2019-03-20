@@ -1,16 +1,4 @@
 <!doctype html>
-<!--
-  Copyright 2015 Google Inc. All rights reserved.
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-      https://www.apache.org/licenses/LICENSE-2.0
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License
--->
 <html lang="en">
 
 <head>
@@ -18,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="description" content="Learn how to use the Firebase platform on the Web">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>ily</title>
+	<title>ily chat</title>
 
 	<!-- Disable tap highlight on IE -->
 	<meta name="msapplication-tap-highlight" content="no">
@@ -28,13 +16,13 @@
 
 	<!-- Add to homescreen for Chrome on Android -->
 	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="application-name" content="ily">
+	<meta name="application-name" content="ily chat">
 	<meta name="theme-color" content="#ffffff">
 
 	<!-- Add to homescreen for Safari on iOS -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
-	<meta name="apple-mobile-web-app-title" content="ily">
+	<meta name="apple-mobile-web-app-title" content="ily chat">
 	<meta name="apple-mobile-web-app-status-bar-style" content="#ffffff">
 
 	<!-- Tile icon for Win8 -->
@@ -43,11 +31,11 @@
 
 	<!-- Material Design Lite -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.orange-indigo.min.css">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 	<!-- App Styling -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+	<link href='https://fonts.googleapis.com/css?family=Product+Sans' rel='stylesheet'>
 	<link rel="stylesheet" href="styles/main.css">
 </head>
 
@@ -56,16 +44,16 @@
 
 		<!-- Header section containing logo -->
 		<header class="mdl-layout__header mdl-layout__header--waterfall mdl-color-text--grey-700 mdl-color--white">
-			<div class="mdl-layout__header-row mdl-cell mdl-cell--12-col">
-				<div><i class="material-icons">favorite_outline</i></div>
+			<div class="mdl-layout__header-row">
+				<span class="mdl-layout-title">ily chat</span>
 				<div id="user-container">
 					<div hidden id="user-pic"></div>
 					<div hidden id="user-name"></div>
-					<button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--red">
-						Sign-out
+					<button hidden id="sign-out" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--red">
+						<i class="material-icons">exit_to_app</i>
 					</button>
-					<button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--green">
-						<i class="material-icons">account_circle</i>Sign-in with Google
+					<button hidden id="sign-in" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--green">
+						<i class="material-icons">person_outline</i>
 					</button>
 				</div>
 			</div>
@@ -76,20 +64,22 @@
 			<div id="messages-card" class="mdl-card mdl-cell mdl-cell--12-col">
 				<div class="mdl-card__supporting-text mdl-color-text--grey-900">
 					<div id="messages">
-						<span id="message-filler"></span>
+						<div id="message-filler">
+							<div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+						</div>
 					</div>
 					<form id="message-form" action="#">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" placeholder="Message.." id="message">
+							<input class="mdl-textfield__input" type="text" placeholder="Type a message" id="message">
 						</div>
-						<button id="submit" disabled type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+						<button id="submit" disabled type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button--colored">
 							<i class="material-icons">send</i>
 						</button>
 					</form>
 					<form id="image-form" action="#">
 						<input id="mediaCapture" type="file" accept="image/*" capture="camera">
-						<button id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
-							<i class="material-icons">photo_camera</i>
+						<button id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button--colored">
+							<i class="material-icons">camera_alt</i>
 						</button>
 					</form>
 				</div>
