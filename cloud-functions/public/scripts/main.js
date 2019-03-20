@@ -14,41 +14,34 @@
  * limitations under the License.
  */
 'use strict';
-
 // Signs-in Friendly Chat.
 function signIn() {
 	// Sign in Firebase using popup auth and Google as the identity provider.
 	var provider = new firebase.auth.GoogleAuthProvider();
 	firebase.auth().signInWithPopup(provider);
 }
-
 // Signs-out of Friendly Chat.
 function signOut() {
 	// Sign out of Firebase.
 	firebase.auth().signOut();
 }
-
 // Initiate firebase auth.
 function initFirebaseAuth() {
 	// Listen to auth state changes.
 	firebase.auth().onAuthStateChanged(authStateObserver);
 }
-
 // Returns the signed-in user's profile Pic URL.
 function getProfilePicUrl() {
 	return firebase.auth().currentUser.photoURL || '/images/profile_placeholder.png';
 }
-
 // Returns the signed-in user's display name.
 function getUserName() {
 	return firebase.auth().currentUser.displayName;
 }
-
 // Returns true if a user is signed-in.
 function isUserSignedIn() {
 	return !!firebase.auth().currentUser;
 }
-
 // Saves a new message on the Cloud Firestore.
 function saveMessage(messageText) {
 	// Add a new message entry to the Firebase database.
@@ -61,12 +54,10 @@ function saveMessage(messageText) {
 		console.error('Error writing new message to Firebase Database', error);
 	});
 }
-
 // Loads chat messages history and listens for upcoming ones.
 function loadMessages() {
 	// Create the query to load the last 12 messages and listen for new ones.
 	var query = firebase.firestore().collection('messages').orderBy('timestamp', 'desc').limit(25);
-
 	// Start listening to the query.
 	query.onSnapshot(function (snapshot) {
 		snapshot.docChanges().forEach(function (change) {
@@ -80,7 +71,6 @@ function loadMessages() {
 		});
 	});
 }
-
 // Saves a new message containing an image in Firebase.
 // This first saves the image in Firebase storage.
 function saveImageMessage(file) {
@@ -107,7 +97,6 @@ function saveImageMessage(file) {
 		console.error('There was an error uploading a file to Cloud Storage:', error);
 	});
 }
-
 // Saves the messaging device token to the datastore.
 function saveMessagingDeviceToken() {
 	firebase.messaging().getToken().then(function (currentToken) {
@@ -126,7 +115,6 @@ function saveMessagingDeviceToken() {
 		console.error('Unable to get messaging token.', error);
 	});
 }
-
 // Requests permissions to show notifications.
 function requestNotificationsPermissions() {
 	console.log('Requesting notifications permission...');
@@ -137,15 +125,12 @@ function requestNotificationsPermissions() {
 		console.error('Unable to get permission to notify.', error);
 	});
 }
-
 // Triggered when a file is selected via the media picker.
 function onMediaFileSelected(event) {
 	event.preventDefault();
 	var file = event.target.files[0];
-
 	// Clear the selection in the file picker input.
 	imageFormElement.reset();
-
 	// Check if the file is an image.
 	if (!file.type.match('image.*')) {
 		var data = {
@@ -160,7 +145,6 @@ function onMediaFileSelected(event) {
 		saveImageMessage(file);
 	}
 }
-
 // Triggered when the send new message form is submitted.
 function onMessageFormSubmit(e) {
 	e.preventDefault();
@@ -173,46 +157,39 @@ function onMessageFormSubmit(e) {
 		});
 	}
 }
-
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
 	if (user) { // User is signed in!
 		// Get the signed-in user's profile pic and name.
 		var profilePicUrl = getProfilePicUrl();
 		var userName = getUserName();
-
 		// Set the user's profile pic and name.
 		userPicElement.style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(profilePicUrl) + ')';
-		userNameElement.textContent = userName;
-
+		//		userNameElement.textContent = userName;
 		// Show user's profile and sign-out button.
-		userNameElement.removeAttribute('hidden');
+		//		userNameElement.removeAttribute('hidden');
 		userPicElement.removeAttribute('hidden');
+		userPicElement.title = userName;
 		signOutButtonElement.removeAttribute('hidden');
-
 		// Hide sign-in button.
 		signInButtonElement.setAttribute('hidden', 'true');
-
 		// We save the Firebase Messaging Device token and enable notifications.
 		saveMessagingDeviceToken();
 	} else { // User is signed out!
 		// Hide user's profile and sign-out button.
-		userNameElement.setAttribute('hidden', 'true');
+		//		userNameElement.setAttribute('hidden', 'true');
 		userPicElement.setAttribute('hidden', 'true');
 		signOutButtonElement.setAttribute('hidden', 'true');
-
 		// Show sign-in button.
 		signInButtonElement.removeAttribute('hidden');
 	}
 }
-
 // Returns true if user is signed-in. Otherwise false and displays a message.
 function checkSignedInWithMessage() {
 	// Return true if the user is signed in Firebase
 	if (isUserSignedIn()) {
 		return true;
 	}
-
 	// Display a message to the user using a Toast.
 	var data = {
 		message: 'You must sign-in first',
@@ -221,13 +198,11 @@ function checkSignedInWithMessage() {
 	signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
 	return false;
 }
-
 // Resets the given MaterialTextField.
 function resetMaterialTextfield(element) {
 	element.value = '';
 	element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
 }
-
 // Template for messages.
 var MESSAGE_TEMPLATE =
 	'<div class="message-container">' +
@@ -235,7 +210,6 @@ var MESSAGE_TEMPLATE =
 	'<div class="message"></div>' +
 	'<div class="name"></div>' +
 	'</div>';
-
 // Adds a size to Google Profile pics URLs.
 function addSizeToGoogleProfilePic(url) {
 	if (url.indexOf('googleusercontent.com') !== -1 && url.indexOf('?') === -1) {
@@ -243,10 +217,8 @@ function addSizeToGoogleProfilePic(url) {
 	}
 	return url;
 }
-
 // A loading image URL.
 var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
-
 // Delete a Message from the UI.
 function deleteMessage(id) {
 	var div = document.getElementById(id);
@@ -255,7 +227,6 @@ function deleteMessage(id) {
 		div.parentNode.removeChild(div);
 	}
 }
-
 // Displays a Message in the UI.
 function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
 	var div = document.getElementById(id);
@@ -278,54 +249,12 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
 	if (picUrl) {
 		div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
 	}
-
 	var date = new Date();
 	date.setTime(timestamp.seconds * 1000);
 	var n = date.toLocaleDateString();
 	var h = date.toLocaleTimeString();
-
-	function timeDifference(current, previous) {
-		var msPerMinute = 60 * 1000;
-		var msPerHour = msPerMinute * 60;
-		var msPerDay = msPerHour * 24;
-		var msPerMonth = msPerDay * 30;
-		var msPerYear = msPerDay * 365;
-
-		var elapsed = current - previous;
-
-		if (elapsed < msPerMinute) {
-			return Math.round(elapsed / 1000) + ' just now';
-		} else if (elapsed < msPerHour) {
-			if (Math.round(elapsed / msPerMinute) == 1)
-				return Math.round(elapsed / msPerMinute) + ' minute ago';
-			else
-				return Math.round(elapsed / msPerMinute) + ' minutes ago';
-		} else if (elapsed < msPerDay) {
-			if (Math.round(elapsed / msPerHour) == 1)
-				return Math.round(elapsed / msPerHour) + ' hour ago';
-			else
-				return Math.round(elapsed / msPerHour) + ' hours ago';
-		} else if (elapsed < msPerMonth) {
-			if (Math.round(elapsed / msPerDay) == 1)
-				return Math.round(elapsed / msPerDay) + ' day ago';
-			else
-				return Math.round(elapsed / msPerDay) + ' days ago';
-		} else if (elapsed < msPerYear) {
-			if (Math.round(elapsed / msPerMonth) == 1)
-				return Math.round(elapsed / msPerMonth) + ' month ago';
-			else
-				return Math.round(elapsed / msPerMonth) + ' months ago';
-		} else {
-			if (Math.round(elapsed / msPerYear) == 1)
-				return Math.round(elapsed / msPerYear) + ' year ago';
-			else
-				return Math.round(elapsed / msPerYear) + ' years ago';
-		}
-	}
-
 	// TESTS
 	var current = new Date();
-
 	div.querySelector('.name').textContent = name + ` · ` + timeDifference(current, date);
 	div.querySelector('.name').title = n + ` at ` + h;
 	var messageElement = div.querySelector('.message');
@@ -350,7 +279,6 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
 	messageListElement.scrollTop = messageListElement.scrollHeight;
 	messageInputElement.focus();
 }
-
 // Enables or disables the submit button depending on the values of the input
 // fields.
 function toggleButton() {
@@ -360,7 +288,6 @@ function toggleButton() {
 		submitButtonElement.setAttribute('disabled', 'true');
 	}
 }
-
 // Checks that the Firebase SDK has been correctly setup and configured.
 function checkSetup() {
 	if (!window.firebase || !(firebase.app instanceof Function) || !firebase.app().options) {
@@ -369,10 +296,8 @@ function checkSetup() {
 			'sure you are running the codelab using `firebase serve`');
 	}
 }
-
 // Checks that Firebase has been imported.
 checkSetup();
-
 // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');
 var messageFormElement = document.getElementById('message-form');
@@ -382,36 +307,70 @@ var imageButtonElement = document.getElementById('submitImage');
 var imageFormElement = document.getElementById('image-form');
 var mediaCaptureElement = document.getElementById('mediaCapture');
 var userPicElement = document.getElementById('user-pic');
-var userNameElement = document.getElementById('user-name');
+//var userNameElement = document.getElementById('user-name');
 var signInButtonElement = document.getElementById('sign-in');
 var signOutButtonElement = document.getElementById('sign-out');
 var signInSnackbarElement = document.getElementById('must-signin-snackbar');
-
 // Saves message on form submit.
 messageFormElement.addEventListener('submit', onMessageFormSubmit);
 signOutButtonElement.addEventListener('click', signOut);
 signInButtonElement.addEventListener('click', signIn);
-
 // Toggle for the button.
 messageInputElement.addEventListener('keyup', toggleButton);
 messageInputElement.addEventListener('change', toggleButton);
-
 // Events for image upload.
 imageButtonElement.addEventListener('click', function (e) {
 	e.preventDefault();
 	mediaCaptureElement.click();
 });
 mediaCaptureElement.addEventListener('change', onMediaFileSelected);
-
 // initialize Firebase
 initFirebaseAuth();
-
 // Remove the warning about timstamps change. 
 var firestore = firebase.firestore();
 var settings = {
 	timestampsInSnapshots: true
 };
 firestore.settings(settings);
-
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
+
+function timeDifference(current, previous) {
+	var msPerMinute = 60 * 1000;
+	var msPerHour = msPerMinute * 60;
+	var msPerDay = msPerHour * 24;
+	var msPerMonth = msPerDay * 30;
+	var msPerYear = msPerDay * 365;
+	var elapsed = current - previous;
+	if (elapsed < msPerMinute) {
+		if (Math.round(elapsed / 1000) < 5)
+			return 'just now';
+		else
+			return Math.round(elapsed / 1000) + ' seconds ago';
+	} else if (elapsed < msPerHour) {
+		if (Math.round(elapsed / msPerMinute) == 1)
+			return Math.round(elapsed / msPerMinute) + ' minute ago';
+		else
+			return Math.round(elapsed / msPerMinute) + ' minutes ago';
+	} else if (elapsed < msPerDay) {
+		if (Math.round(elapsed / msPerHour) == 1)
+			return Math.round(elapsed / msPerHour) + ' hour ago';
+		else
+			return Math.round(elapsed / msPerHour) + ' hours ago';
+	} else if (elapsed < msPerMonth) {
+		if (Math.round(elapsed / msPerDay) == 1)
+			return Math.round(elapsed / msPerDay) + ' day ago';
+		else
+			return Math.round(elapsed / msPerDay) + ' days ago';
+	} else if (elapsed < msPerYear) {
+		if (Math.round(elapsed / msPerMonth) == 1)
+			return Math.round(elapsed / msPerMonth) + ' month ago';
+		else
+			return Math.round(elapsed / msPerMonth) + ' months ago';
+	} else {
+		if (Math.round(elapsed / msPerYear) == 1)
+			return Math.round(elapsed / msPerYear) + ' year ago';
+		else
+			return Math.round(elapsed / msPerYear) + ' years ago';
+	}
+}

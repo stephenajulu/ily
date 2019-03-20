@@ -2,6 +2,10 @@ html,
 body,
 * {
 	font-family: 'Product Sans', 'Roboto', 'Helvetica', 'Noto', sans-serif;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 main,
@@ -168,13 +172,15 @@ main,
 	height: 32px;
 	background-size: 32px;
 	border-radius: 100%;
+	margin: 0 16px;
 }
 
+/*
 #user-container #user-name {
 	font-size: 14px;
 	padding: 0 16px;
 }
-
+*/
 .mdl-button--icon {
 	padding: 24px;
 }
