@@ -93,6 +93,12 @@ function saveImageMessage(file) {
 	}).then(function (messageRef) {
 		// 2 - Upload the image to Cloud Storage.
 		var filePath = firebase.auth().currentUser.uid + '/' + messageRef.id + '/' + file.name;
+		// Display a message to the user using a Toast.
+		var data = {
+			message: 'Image uploaded!',
+			timeout: 3000
+		};
+		signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
 		return firebase.storage().ref(filePath).put(file).then(function (fileSnapshot) {
 			// 3 - Generate a public URL for the file.
 			return fileSnapshot.ref.getDownloadURL().then((url) => {
@@ -104,7 +110,13 @@ function saveImageMessage(file) {
 			});
 		});
 	}).catch(function (error) {
-		console.error('There was an error uploading a file to Cloud Storage:', error);
+		console.error('There was an error uploading a file to Cloud Storage: ', error);
+		// Display a message to the user using a Toast.
+		var data = {
+			message: 'There was an error uploading a file to Cloud Storage: ' + error,
+			timeout: 3000
+		};
+		signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
 	});
 }
 
@@ -133,8 +145,19 @@ function requestNotificationsPermissions() {
 	firebase.messaging().requestPermission().then(function () {
 		// Notification permission granted.
 		saveMessagingDeviceToken();
+		var data = {
+			message: 'Enabled notifications!',
+			timeout: 3000
+		};
+		signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
 	}).catch(function (error) {
 		console.error('Unable to get permission to notify.', error);
+		saveMessagingDeviceToken();
+		var data = {
+			message: 'Notifications disabled!',
+			timeout: 3000
+		};
+		signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
 	});
 }
 
@@ -149,8 +172,8 @@ function onMediaFileSelected(event) {
 	// Check if the file is an image.
 	if (!file.type.match('image.*')) {
 		var data = {
-			message: 'You can only share images',
-			timeout: 2000
+			message: 'You can only share images!',
+			timeout: 3000
 		};
 		signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
 		return;
@@ -181,6 +204,12 @@ function authStateObserver(user) {
 		var profilePicUrl = getProfilePicUrl();
 		var userName = getUserName();
 
+		var data = {
+			message: 'Signed in as ' + userName,
+			timeout: 3000
+		};
+		signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
+
 		// Set the user's profile pic and name.
 		userPicElement.style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(profilePicUrl) + ')';
 		//		userNameElement.textContent = userName;
@@ -201,6 +230,12 @@ function authStateObserver(user) {
 		userPicElement.setAttribute('hidden', 'true');
 		signOutButtonElement.setAttribute('hidden', 'true');
 
+		var data = {
+			message: 'Signed out!',
+			timeout: 3000
+		};
+		signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
+
 		// Show sign-in button.
 		signInButtonElement.removeAttribute('hidden');
 	}
@@ -215,8 +250,8 @@ function checkSignedInWithMessage() {
 
 	// Display a message to the user using a Toast.
 	var data = {
-		message: 'You must sign-in first',
-		timeout: 2000
+		message: 'You must sign in first!',
+		timeout: 3000
 	};
 	signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
 	return false;

@@ -74,7 +74,7 @@ body,
 	opacity: 1;
 }
 
-.message-container .pic {
+.pic {
 	background-image: url('/images/profile_placeholder.png');
 	background-repeat: no-repeat;
 	width: 32px;
@@ -83,7 +83,7 @@ body,
 	border-radius: 100%;
 }
 
-.message-container .spacing {
+.spacing {
 	display: table-cell;
 	vertical-align: top;
 	padding-right: 16px;
@@ -110,7 +110,7 @@ body,
 	margin-left: -12px;
 }
 
-.message-container .name {
+.name {
 	display: inline-block;
 	padding-left: 48px;
 	padding-top: 4px;
@@ -182,7 +182,7 @@ body,
 }
 */
 .mdl-button--icon {
-	padding: 20px;
+	padding: 18px;
 }
 
 .message img {
@@ -197,6 +197,6 @@ body,
 
 .mdl-textfield .mdl-button {
 	position: absolute;
-	bottom: 2px;
-	right: 2px;
+	bottom: 4px;
+	right: 4px;
 }
