@@ -183,10 +183,10 @@ function authStateObserver(user) {
 
 		// Set the user's profile pic and name.
 		userPicElement.style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(profilePicUrl) + ')';
-		userNameElement.textContent = userName;
+		//		userNameElement.textContent = userName;
 
 		// Show user's profile and sign-out button.
-		userNameElement.removeAttribute('hidden');
+		//		userNameElement.removeAttribute('hidden');
 		userPicElement.removeAttribute('hidden');
 		signOutButtonElement.removeAttribute('hidden');
 
@@ -197,7 +197,7 @@ function authStateObserver(user) {
 		saveMessagingDeviceToken();
 	} else { // User is signed out!
 		// Hide user's profile and sign-out button.
-		userNameElement.setAttribute('hidden', 'true');
+		//		userNameElement.setAttribute('hidden', 'true');
 		userPicElement.setAttribute('hidden', 'true');
 		signOutButtonElement.setAttribute('hidden', 'true');
 
@@ -380,7 +380,7 @@ var imageButtonElement = document.getElementById('submitImage');
 var imageFormElement = document.getElementById('image-form');
 var mediaCaptureElement = document.getElementById('mediaCapture');
 var userPicElement = document.getElementById('user-pic');
-var userNameElement = document.getElementById('user-name');
+//var userNameElement = document.getElementById('user-name');
 var signInButtonElement = document.getElementById('sign-in');
 var signOutButtonElement = document.getElementById('sign-out');
 var signInSnackbarElement = document.getElementById('must-signin-snackbar');
