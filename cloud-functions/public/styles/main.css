@@ -94,7 +94,8 @@ body,
 	display: table-cell;
 	border-radius: 0 8px 8px 8px;
 	padding: 16px;
-	background-color: #fff;
+	color: #fff;
+	background-color: rgb(96, 125, 139);
 }
 
 .message:after {
@@ -103,7 +104,7 @@ body,
 	left: 0;
 	top: 6px;
 	border: 12px solid transparent;
-	border-right-color: #fff;
+	border-right-color: rgb(96, 125, 139);
 	border-left: 0;
 	border-top: 0;
 	margin-top: -6px;
