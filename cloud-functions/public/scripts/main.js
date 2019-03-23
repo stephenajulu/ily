@@ -124,7 +124,7 @@ function saveImageMessage(file) {
 function saveMessagingDeviceToken() {
 	firebase.messaging().getToken().then(function (currentToken) {
 		if (currentToken) {
-			console.log('Got FCM device token:', currentToken);
+			console.log('Got FCM device token: ', currentToken);
 			// Saving the Device Token to the datastore.
 			firebase.firestore().collection('fcmTokens').doc(currentToken)
 				.set({
@@ -135,7 +135,7 @@ function saveMessagingDeviceToken() {
 			requestNotificationsPermissions();
 		}
 	}).catch(function (error) {
-		console.error('Unable to get messaging token.', error);
+		console.error('Unable to get messaging token: ', error);
 	});
 }
 
