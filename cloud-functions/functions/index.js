@@ -21,8 +21,6 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const vision = require('@google-cloud/vision');
 const client = new vision.ImageAnnotatorClient();
-//const Vision = require('@google-cloud/vision');
-//const vision = new Vision();
 const spawn = require('child-process-promise').spawn;
 const path = require('path');
 const os = require('os');
