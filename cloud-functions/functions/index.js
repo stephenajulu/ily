@@ -19,8 +19,10 @@ const functions = require('firebase-functions');
 // Import and initialize the Firebase Admin SDK.
 const admin = require('firebase-admin');
 admin.initializeApp();
-const Vision = require('@google-cloud/vision');
-const vision = new Vision();
+const vision = require('@google-cloud/vision');
+const client = new vision.ImageAnnotatorClient();
+//const Vision = require('@google-cloud/vision');
+//const vision = new Vision();
 const spawn = require('child-process-promise').spawn;
 const path = require('path');
 const os = require('os');
@@ -54,9 +56,9 @@ exports.blurOffensiveImages = functions.runWith({
 		};
 
 		// Check the image content using the Cloud Vision API.
-		const batchAnnotateImagesResponse = await vision.safeSearchDetection(image);
+		const batchAnnotateImagesResponse = await client.safeSearchDetection(image);
 		const safeSearchResult = batchAnnotateImagesResponse[0].safeSearchAnnotation;
-		const Likelihood = Vision.types.Likelihood;
+		const Likelihood = vision.types.Likelihood;
 		if (Likelihood[safeSearchResult.adult] >= Likelihood.LIKELY ||
 			Likelihood[safeSearchResult.violence] >= Likelihood.LIKELY) {
 			console.log('The image', object.name, 'has been detected as inappropriate.');
