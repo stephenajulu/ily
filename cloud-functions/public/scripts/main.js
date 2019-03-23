@@ -280,7 +280,7 @@ function addSizeToGoogleProfilePic(url) {
 }
 
 // A loading image URL.
-var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
+var LOADING_IMAGE_URL = '/images/puff.svg';
 
 // Delete a Message from the UI.
 function deleteMessage(id) {

@@ -35,7 +35,7 @@ exports.addWelcomeMessages = functions.auth.user().onCreate(async (user) => {
 	// which then displays it in the FriendlyChat clients.
 	await admin.firestore().collection('messages').add({
 		name: 'ily',
-		profilePicUrl: '/images/firebase-logo.png', // Firebase logo
+		profilePicUrl: '/images/logo.png', // Firebase logo
 		text: `${fullName} signed in for the first time! Welcome!`,
 		timestamp: admin.firestore.FieldValue.serverTimestamp(),
 	});
