@@ -8,3 +8,25 @@ patch:
         patched: '2019-07-03T22:18:18.128Z'
     - firebase-admin > @google-cloud/storage > async > lodash:
         patched: '2019-07-03T22:18:18.128Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - snyk > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - firebase-functions > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
+    - firebase-admin > @google-cloud/storage > async > lodash:
+        patched: '2019-07-18T05:50:13.406Z'
