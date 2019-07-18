@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "eslint": "^6.0.1",
-    "eslint-plugin-promise": "^4.1.1"
+    "eslint-plugin-promise": "^4.2.1"
   },
   "scripts": {
     "lint": "eslint",
